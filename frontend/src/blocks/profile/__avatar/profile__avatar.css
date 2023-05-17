@@ -1,0 +1,15 @@
+.profile__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%; 
+  
+}
+
+ .profile__avatar:hover {
+  opacity: 0.3;
+  transition: visibility .2s,opacity .5s;
+  visibility: visible;
+ 
+}
+
+

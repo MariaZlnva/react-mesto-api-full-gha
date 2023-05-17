@@ -1,0 +1,14 @@
+@media screen and (max-width: 570px){
+  .header__authorise_activeBurger{
+    display: flex;
+    position: absolute;
+    border-bottom: 1px solid #545454;
+    width: 100%;
+    flex-direction: column;
+    right: 0;
+    bottom: 83px;
+    align-items: center;
+    padding-bottom: 40px;
+
+  }
+}

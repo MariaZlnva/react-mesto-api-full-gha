@@ -1,0 +1,5 @@
+@media screen and (max-width: 570px) {
+  .header__activeBurger {
+    padding-top: 170px;
+  }
+}

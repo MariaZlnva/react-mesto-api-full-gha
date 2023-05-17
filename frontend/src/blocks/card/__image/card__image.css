@@ -1,0 +1,8 @@
+.card__image {
+  width: 100%;
+  /* object-fit: cover; */
+
+  height: 282px;
+
+  cursor: pointer;
+}

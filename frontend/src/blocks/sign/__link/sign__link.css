@@ -1,0 +1,11 @@
+.sign__link {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21px;
+  min-height: 17px;
+}

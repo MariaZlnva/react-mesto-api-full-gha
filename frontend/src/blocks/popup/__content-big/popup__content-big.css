@@ -1,0 +1,22 @@
+.popup__content-big {
+  margin: auto;
+  /* max-width: 75vw;
+  max-height: 75vh;
+  /* max-width: 816px; */
+  /* height: 100%; */
+  /* color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 0; */
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/* 
+@media screen and (max-width: 770px) {
+  .popup__content-big {
+    max-height: 321px;
+  }
+} */

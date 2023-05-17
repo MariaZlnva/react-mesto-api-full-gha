@@ -1,0 +1,10 @@
+.card__info {
+  background-color: white;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 25px 15px 24px 21px;
+  box-sizing: border-box;
+  align-items: center;
+}

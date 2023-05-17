@@ -1,0 +1,15 @@
+@media screen and (max-width: 570px){
+  /* делаем бургер активным - класс будет доб.при клике на бургер */
+  .header__burger_active:nth-of-type(1){
+    display: none;
+  }
+  .header__burger_active:nth-of-type(2){
+    top: 50%;
+    transform: translate(-50%, 0)  rotate(45deg)
+  }
+  .header__burger_active:nth-of-type(3){
+    top: 50%;
+    transform: translate(-50%, 0)  rotate(-45deg)
+  }
+}
+  

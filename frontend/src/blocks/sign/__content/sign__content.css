@@ -1,0 +1,13 @@
+.sign__content {
+  display: flex;
+  flex-direction: column;
+  width: 358px;
+  margin: 0 auto;
+  padding: 0px 0px 37px;
+}
+
+@media screen and (max-width: 770px) {
+  .sign__content {
+    width: 260px;
+  }
+}

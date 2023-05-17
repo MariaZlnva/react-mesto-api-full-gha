@@ -1,0 +1,19 @@
+.profile__info {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(min-content, max-content));
+}
+
+@media screen and (max-width: 760px) {
+  .profile__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 29px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .profile__info {
+    align-items: center;
+  }
+}

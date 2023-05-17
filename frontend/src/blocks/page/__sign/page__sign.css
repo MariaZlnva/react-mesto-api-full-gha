@@ -1,0 +1,16 @@
+.page__sign {
+  margin: 0 200px;
+  padding: 60px 0 80px;
+}
+
+@media screen and (max-width: 980px) {
+  .page__sign {
+    margin: 0 100px;
+  }
+}
+@media screen and (max-width: 670px) {
+  .page__sign {
+    margin: 0;
+    padding: 40px 0 77px;
+  }
+}
