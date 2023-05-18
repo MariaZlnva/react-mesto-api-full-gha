@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const app = express(); // создаем приложение методом express
 const { celebrate, Joi, errors } = require('celebrate');
 const { PORT, DB_ADDRESS } = require('./config');
+const cors = require('./middlewares/cors');
 
 const routerUsers = require('./routes/users');
 const routerCard = require('./routes/cards');
@@ -24,15 +25,16 @@ mongoose.connect(DB_ADDRESS, {
   useNewUrlParser: true,
 });
 
-app.use(cors({
-  // http://localhost:3001/ https://mesto.zlnva.nomoredomains.monster
-  origin: '*',
-  methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
-  allowedHeaders: ['Content-Type'],
-  // credentials: true,
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-}));
+app.use(cors);
+// app.use(cors({
+//   // http://localhost:3001/ https://mesto.zlnva.nomoredomains.monster
+//   origin: '*',
+//   methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
+//   allowedHeaders: ['Content-Type'],
+//   // credentials: true,
+//   preflightContinue: false,
+//   optionsSuccessStatus: 204,
+// }));
 
 // Парсинг входящих данных со стороны клиента
 // app.use(express.json());

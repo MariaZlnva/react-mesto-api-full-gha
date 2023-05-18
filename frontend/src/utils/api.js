@@ -19,7 +19,7 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: this._headers,
-      credentials: 'include'
+      // credentials: 'include'
     }).then(this._checkResponse);
   }
 
@@ -27,7 +27,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
       headers: this._headers,
-      credentials: 'include'
+      // credentials: 'include'
     }).then(this._checkResponse);
   }
 
@@ -43,7 +43,7 @@ class Api {
         name: dataInput.nameUser,
         about: dataInput.aboutUser,
       }),
-      credentials: 'include'
+      // credentials: 'include'
     }).then(this._checkResponse);
   }
 
@@ -54,7 +54,7 @@ class Api {
         avatar: dataForm.avatar,
       }),
       headers: this._headers,
-      credentials: 'include'
+      // credentials: 'include'
     }).then(this._checkResponse);
   }
 
@@ -66,7 +66,7 @@ class Api {
         link: dataCard.cardUrl,
       }),
       headers: this._headers,
-      credentials: 'include'
+      // credentials: 'include'
     }).then(this._checkResponse);
   }
 
@@ -85,7 +85,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
-      credentials: 'include'
+      // credentials: 'include'
     }).then(this._checkResponse);
   }
 
@@ -93,7 +93,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
-      credentials: 'include'
+      // credentials: 'include'
     }).then(this._checkResponse);
   }
 }
