@@ -1,8 +1,8 @@
 const allowedCors = [
   'https://mesto.zlnva.nomoredomains.monster',
   'http://mesto.zlnva.nomoredomains.monster',
-  'localhost:3000',
-  'localhost:3001',
+  'http://localhost:3000',
+  'http://localhost:3001',
   'https://158.160.68.240',
   'http://158.160.68.240',
 ];

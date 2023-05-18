@@ -132,7 +132,6 @@ function App() {
     api
       .changeProfileData(dataInput)
       .then((res) => {
-        console.log(res);
         setCurrentUser(res);
         closeAllPopups();
         resetValidation(dataInput);
