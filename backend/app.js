@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const app = express(); // создаем приложение методом express
+const path = require('path');
 const { celebrate, Joi, errors } = require('celebrate');
 const { PORT, DB_ADDRESS } = require('./config');
 const cors = require('./middlewares/cors');
@@ -84,6 +85,9 @@ app.use(errorLogger); // подключаем логгер ошибок посл
 
 // обработчик ошибок celebrate
 app.use(errors());
+
+// при обращении через браузер index.html
+app.use(express.static(path.join(__dirname, 'public')));
 
 // обработчик ошибки
 // eslint-disable-next-line no-unused-vars
