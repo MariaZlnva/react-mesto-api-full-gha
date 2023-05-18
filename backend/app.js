@@ -29,8 +29,9 @@ app.use(cors({
   origin: '*',
   methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
   allowedHeaders: ['Content-Type'],
-  credentials: true,
+  // credentials: true,
   preflightContinue: false,
+  optionsSuccessStatus: 204,
 }));
 
 // Парсинг входящих данных со стороны клиента
