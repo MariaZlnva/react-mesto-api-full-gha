@@ -6,10 +6,8 @@ const ForbiddenError = require('../errors/Forbidden');
 const getCards = ((req, res, next) => {
   console.log('пришел запрос на getCards');
   Card.find({})
-    .populate([
-      { path: 'likes', model: 'user' },
-      { path: 'owner', model: 'user' },
-    ])
+    .populate('owner')
+    .populate('likes')
     .then((cards) => {
       res.send(cards);
     })
@@ -42,7 +40,6 @@ const deleteCard = (req, res, next) => {
       { path: 'owner', model: 'user' },
     ])
     .then((card) => {
-      console.log(userId, String(card.owner._id));
       if (!card) {
         throw new NotFoundError('Карточка не найдена');
       }
