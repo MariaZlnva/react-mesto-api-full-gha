@@ -5,7 +5,6 @@ class Api {
   constructor({ baseUrl, headers, idGroup }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
-    // this._idGroup = idGroup;
   }
   //метод проверки ответа от сервера
   _checkResponse(res) {
@@ -72,7 +71,7 @@ class Api {
 
   deleteCard(cardId) {
     return fetch(
-      `${this._baseUrl}/cards/${cardId}`, //Вместо cardId в URL нужно подставить параметр _id карточки, которую нужно удалить. _id каждой карточки есть в её JSON:
+      `${this._baseUrl}/cards/${cardId}`,
       {
         method: "DELETE",
         headers: this._headers,
@@ -99,11 +98,9 @@ class Api {
 }
 
 export const api = new Api({
-  // baseUrl: "https://nomoreparties.co/v1/",
   baseUrl: BASE_URL,
   headers: {
     // authorization: "d9d74726-0f35-4f64-a4f4-3690ec473717",
     "Content-Type": "application/json",
   },
-  // idGroup: "cohort-59",
 });

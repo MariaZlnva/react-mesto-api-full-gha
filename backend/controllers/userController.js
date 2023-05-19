@@ -144,7 +144,6 @@ const updateAvatar = (req, res, next) => {
       next(err);
     });
 };
-
 const login = (req, res, next) => {
   console.log('запрос на авторизацию пришел');
   const { email, password } = req.body;

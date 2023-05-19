@@ -13,13 +13,13 @@ module.exports = (req, res, next) => {
   }
   let payload;
   try {
-    // проверяем что токен тот самый
+    // проверяем что токен
     payload = jsonwebtoken.verify(jwt, NODE_ENV === 'production' ? JWT_SECRET : 'jwt_key_dev');
   } catch (err) {
     return next(new UnauthorizedError('Необходима авторизация'));
   }
   req.user = {
     _id: payload._id,
-  }; // записываем пейлоуд в объект запроса
-  return next(); // пропускаем запрос дальше
+  };
+  return next();
 };
