@@ -20,7 +20,7 @@ class Api {
       method: 'GET',
       headers: this._headers,
       credentials: 'include'
-    }).then(this._checkResponse);
+    }).then((res) => this._checkResponse(res));
   }
 
   getItemsServer() {
@@ -28,7 +28,7 @@ class Api {
       method: 'GET',
       headers: this._headers,
       credentials: 'include'
-    }).then(this._checkResponse);
+    }).then((res) => this._checkResponse(res));
   }
 
   getInitialData() {
@@ -44,7 +44,7 @@ class Api {
         about: dataInput.aboutUser,
       }),
       credentials: 'include'
-    }).then(this._checkResponse);
+    }).then((res) => this._checkResponse(res));
   }
 
   changeAvatar(dataForm) {
@@ -55,7 +55,7 @@ class Api {
       }),
       headers: this._headers,
       credentials: 'include'
-    }).then(this._checkResponse);
+    }).then((res) => this._checkResponse(res));
   }
 
   addNewCard(dataCard) {
@@ -67,7 +67,7 @@ class Api {
       }),
       headers: this._headers,
       credentials: 'include'
-    }).then(this._checkResponse);
+    }).then((res) => this._checkResponse(res));
   }
 
   deleteCard(cardId) {
@@ -78,7 +78,7 @@ class Api {
         headers: this._headers,
         credentials: 'include'
       }
-    ).then(this._checkResponse);
+    ).then((res) => this._checkResponse(res));
   }
 
   addLike(cardId) {
@@ -86,7 +86,7 @@ class Api {
       method: "PUT",
       headers: this._headers,
       credentials: 'include'
-    }).then(this._checkResponse);
+    }).then((res) => this._checkResponse(res));
   }
 
   deleteLike(cardId) {
@@ -94,7 +94,7 @@ class Api {
       method: "DELETE",
       headers: this._headers,
       credentials: 'include'
-    }).then(this._checkResponse);
+    }).then((res) => this._checkResponse(res));
   }
 }
 
