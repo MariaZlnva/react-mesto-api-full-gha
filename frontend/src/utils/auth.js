@@ -14,7 +14,7 @@ export const register = (email, password) => {
       body: JSON.stringify({ password, email }),
       credentials: 'include'
     })
-      .then(checkResponse) 
+      .then((res) => checkResponse(res)) 
   )
 };
 
@@ -28,10 +28,9 @@ export const authorize = (email, password) => {
     body: JSON.stringify({ password, email }),
     credentials: 'include'
   })
-    .then(checkResponse);
+    .then((res) => checkResponse(res));
 };
 
-//проверки валидности токена и получения email для вставки в шапку сайта:
 export const getContent = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
@@ -42,7 +41,7 @@ export const getContent = () => {
     },
     credentials: 'include'
   })
-  .then(checkResponse)
+  .then((res) => checkResponse(res))
 }
 
 const checkResponse = (res) =>
