@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jsonwebtoken = require('jsonwebtoken');
 const User = require('../models/userSchema');
-const { JWT_SECRET } = require('../config');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const BadRequestError = require('../errors/BadRequest');
 const NotFoundError = require('../errors/NotFound');
@@ -151,7 +152,7 @@ const login = (req, res, next) => {
     .then((user) => {
       // email и пароль проверены
       // создадим токен
-      const token = jsonwebtoken.sign({ _id: user._id }, JWT_SECRET, {
+      const token = jsonwebtoken.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'jwt_key_dev', {
         expiresIn: '7d',
       });
       // вернём токен
