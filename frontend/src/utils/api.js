@@ -2,7 +2,7 @@
 import { BASE_URL } from "./auth";
 
 class Api {
-  constructor({ baseUrl, headers, idGroup }) {
+  constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
   }
@@ -18,7 +18,7 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: this._headers,
-      credentials: 'include'
+      // credentials: 'include'
     }).then((res) => this._checkResponse(res));
   }
 
@@ -26,7 +26,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
       headers: this._headers,
-      credentials: 'include'
+      // credentials: 'include'
     }).then((res) => this._checkResponse(res));
   }
 
@@ -42,7 +42,7 @@ class Api {
         name: dataInput.nameUser,
         about: dataInput.aboutUser,
       }),
-      credentials: 'include'
+      // credentials: 'include'
     }).then((res) => this._checkResponse(res));
   }
 
@@ -53,7 +53,7 @@ class Api {
         avatar: dataForm.avatar,
       }),
       headers: this._headers,
-      credentials: 'include'
+      // credentials: 'include'
     }).then((res) => this._checkResponse(res));
   }
 
@@ -65,7 +65,7 @@ class Api {
         link: dataCard.cardUrl,
       }),
       headers: this._headers,
-      credentials: 'include'
+      // credentials: 'include'
     }).then((res) => this._checkResponse(res));
   }
 
@@ -75,7 +75,7 @@ class Api {
       {
         method: "DELETE",
         headers: this._headers,
-        credentials: 'include'
+        // credentials: 'include'
       }
     ).then((res) => this._checkResponse(res));
   }
@@ -84,7 +84,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
-      credentials: 'include'
+      // credentials: 'include'
     }).then((res) => this._checkResponse(res));
   }
 
@@ -92,7 +92,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
-      credentials: 'include'
+      // credentials: 'include'
     }).then((res) => this._checkResponse(res));
   }
 }
@@ -100,7 +100,7 @@ class Api {
 export const api = new Api({
   baseUrl: BASE_URL,
   headers: {
-    // authorization: "d9d74726-0f35-4f64-a4f4-3690ec473717",
+    authorization: `Bearer ${localStorage.getItem("token")}`,
     "Content-Type": "application/json",
     'Accept': 'application/json',
   },

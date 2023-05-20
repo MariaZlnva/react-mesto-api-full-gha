@@ -8,7 +8,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.68.240
+IP 158.160.68.240
 
 Frontend https://mesto.zlnva.nomoredomains.monster/
 

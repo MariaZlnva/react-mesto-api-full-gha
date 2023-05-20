@@ -149,18 +149,19 @@ const login = (req, res, next) => {
   const { email, password } = req.body;
   User.findUserByCredentials(email, password)
     .then((user) => {
-      // email и пароль проверены
+      // аутентификация успешна - email и пароль проверены
       // создадим токен
       const token = jsonwebtoken.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'jwt_key_dev', {
         expiresIn: '7d',
       });
       // вернём токен
-      res.cookie('jwt', token, {
-        maxAge: 3600000 * 24 * 7,
-        httpOnly: true, // ограничим доступ из JS
-        sameSite: true,
-      })
-        .send({ _id: user._id });
+      res.send({ token });
+      // res.cookie('jwt', token, {
+      //   maxAge: 3600000 * 24 * 7,
+      //   httpOnly: true, // ограничим доступ из JS
+      //   sameSite: true,
+      // })
+      // .send({ _id: user._id });
     })
     .catch((err) => next(err));
 };
