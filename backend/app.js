@@ -1,14 +1,19 @@
 require('dotenv').config();
+// Импорт npm-пакетов
 const express = require('express');
-const cors = require('cors');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 
+const cors = require('cors');
+const bodyParser = require('body-parser');
+// const cookieParser = require('cookie-parser');
+
+// создаем приложение
 const app = express();
-const path = require('path');
+
+// const path = require('path');
 const helmet = require('helmet');
 const { celebrate, Joi, errors } = require('celebrate');
+const limiter = require('./middlewares/limiter');
 const { PORT, DB_ADDRESS } = require('./config');
 
 const routerUsers = require('./routes/users');
@@ -22,6 +27,7 @@ const NotFoundError = require('./errors/NotFound');
 const { REGEX_URL } = require('./constants/regex');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
+// подключение к серверу монго
 mongoose.connect(DB_ADDRESS, {
   useNewUrlParser: true,
 });
@@ -31,7 +37,7 @@ mongoose.connect(DB_ADDRESS, {
 app.use(bodyParser.json()); // для собирания JSON-формата
 app.use(bodyParser.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
 // Парсинг кук
-app.use(cookieParser());
+// app.use(cookieParser());
 
 const corsOptions = {
   origin: [
@@ -48,9 +54,13 @@ const corsOptions = {
   preflightContinue: false,
   optionsSuccessStatus: 204,
 };
+
 app.use(cors(corsOptions));
 
+// Миддлвэры для безопасности (лимитер и хельмет)
+app.use(limiter); // ограничим доступ
 app.use(helmet()); // защитим приложение Node.js от уязвимостей и кибератак
+
 app.use(requestLogger); // подключаем логгер запросов до всех обработчиков роутов
 
 // Не забудьте удалить этот код после успешного прохождения ревью.
@@ -88,26 +98,21 @@ app.use('*', (req, res, next) => {
   next(new NotFoundError('Страница не найдена'));
 });
 
-app.use(errorLogger); // подключаем логгер ошибок после обработчиков роутов и до обработчиков ошибок
-
-// обработчик ошибок celebrate
-app.use(errors());
-
-// при обращении через браузер index.html
-app.use(express.static(path.join(__dirname, 'public')));
-
 // обработчик ошибки
+app.use(errorLogger); // подключаем логгер ошибок после обработчиков роутов и до обработчиков ошибок
+app.use(errors()); // обработчик ошибок celebrate
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
-  // если у ошибки нет статуса, выставляем 500
-  const { statusCode = 500, message } = err;
-
+  const { statusCode = 500, message } = err; // если у ошибки нет статуса, выставляем 500
   res.status(statusCode).send({
     message: statusCode === 500
       ? 'На сервере произошла ошибка'
       : message,
   });
 });
+
+// // при обращении через браузер index.html
+// app.use(express.static(path.join(__dirname, 'public')));
 
 // принимаем сообщения с PORT
 app.listen(PORT, () => {

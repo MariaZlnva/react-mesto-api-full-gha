@@ -51,7 +51,6 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
     if (token) {
       auth
         .getContent(token)
@@ -68,8 +67,6 @@ function App() {
 
   useEffect(() => {
     if (isloggedIn) {
-      const token = localStorage.getItem("token");
-      console.log(token);
       api
         .getInitialData()
         .then(([dataUser, cardsServer]) => {
