@@ -50,22 +50,6 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    checkToken()
-  }, []);
-
-  useEffect(() => {
-    if (isloggedIn) {
-      api
-        .getInitialData()
-        .then(([dataUser, cardsServer]) => {
-          setCurrentUser(dataUser);
-          setCards(cardsServer);
-        })
-        .catch((err) => console.log("Error getInitialData!"));
-    }
-  }, [isloggedIn]);
-
-  const checkToken = () => {
     const token = localStorage.getItem("token");
     console.log(token);
     if (token) {
@@ -80,7 +64,38 @@ function App() {
         })
         .catch((err) => console.log(err));
     }
-  }
+  }, [isloggedIn]);
+
+  useEffect(() => {
+    if (isloggedIn) {
+      const token = localStorage.getItem("token");
+      console.log(token);
+      api
+        .getInitialData()
+        .then(([dataUser, cardsServer]) => {
+          setCurrentUser(dataUser);
+          setCards(cardsServer);
+        })
+        .catch((err) => console.log("Error getInitialData!"));
+    }
+  }, [isloggedIn]);
+
+  // const checkToken = () => {
+  //   const token = localStorage.getItem("token");
+  //   console.log(token);
+  //   if (token & !isloggedIn) {
+  //     auth
+  //       .getContent(token)
+  //       .then((res) => {
+  //         if (res) {
+  //           setEmailUser(res.email);
+  //           setIsloggedIn(true);
+  //           navigate("/", { replace: true });
+  //         }
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }
 
   function handleSubmitLogin({ email, password }) {
     if (!email || !password) {

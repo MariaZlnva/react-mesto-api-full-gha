@@ -6,6 +6,13 @@ class Api {
     this._baseUrl = baseUrl;
     this._headers = headers;
   }
+
+  _dataHeaders = () => {
+    this._token = localStorage.getItem('token');
+    this._headers.authorization = `Bearer ${this._token}`
+    return this._headers;
+  }
+
   //метод проверки ответа от сервера
   _checkResponse(res) {
     if (res.ok) {
@@ -17,16 +24,14 @@ class Api {
   getInfoUserServer() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      headers: this._headers,
-      // credentials: 'include'
+      headers: this._dataHeaders(),
     }).then((res) => this._checkResponse(res));
   }
 
   getItemsServer() {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
-      headers: this._headers,
-      // credentials: 'include'
+      headers: this._dataHeaders(),
     }).then((res) => this._checkResponse(res));
   }
 
@@ -37,12 +42,11 @@ class Api {
   changeProfileData(dataInput) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: this._dataHeaders(),
       body: JSON.stringify({
         name: dataInput.nameUser,
         about: dataInput.aboutUser,
       }),
-      // credentials: 'include'
     }).then((res) => this._checkResponse(res));
   }
 
@@ -52,8 +56,7 @@ class Api {
       body: JSON.stringify({
         avatar: dataForm.avatar,
       }),
-      headers: this._headers,
-      // credentials: 'include'
+      headers:this._dataHeaders(),
     }).then((res) => this._checkResponse(res));
   }
 
@@ -64,8 +67,7 @@ class Api {
         name: dataCard.cardName,
         link: dataCard.cardUrl,
       }),
-      headers: this._headers,
-      // credentials: 'include'
+      headers: this._dataHeaders(),
     }).then((res) => this._checkResponse(res));
   }
 
@@ -74,8 +76,7 @@ class Api {
       `${this._baseUrl}/cards/${cardId}`,
       {
         method: "DELETE",
-        headers: this._headers,
-        // credentials: 'include'
+        headers: this._dataHeaders(),
       }
     ).then((res) => this._checkResponse(res));
   }
@@ -83,25 +84,23 @@ class Api {
   addLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
-      headers: this._headers,
-      // credentials: 'include'
+      headers: this._dataHeaders(),
     }).then((res) => this._checkResponse(res));
   }
 
   deleteLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
-      headers: this._headers,
-      // credentials: 'include'
+      headers: this._dataHeaders(),
     }).then((res) => this._checkResponse(res));
   }
+
 }
 
 export const api = new Api({
   baseUrl: BASE_URL,
   headers: {
-    authorization: `Bearer ${localStorage.getItem("token")}`,
     "Content-Type": "application/json",
-    'Accept': 'application/json',
+    Accept: 'application/json',
   },
 });
