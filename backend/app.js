@@ -7,9 +7,10 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 const path = require('path');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
 const { celebrate, Joi, errors } = require('celebrate');
 const { PORT, DB_ADDRESS } = require('./config');
-// const cors = require('./middlewares/cors');
 
 const routerUsers = require('./routes/users');
 const routerCard = require('./routes/cards');
@@ -33,9 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // для приёма ве�
 // Парсинг кук
 app.use(cookieParser());
 
-// app.use(cors);
 const corsOptions = {
-  // origin: 'http://localhost:3001',
   origin: [
     'https://mesto.zlnva.nomoredomains.monster',
     'http://mesto.zlnva.nomoredomains.monster',
@@ -52,6 +51,16 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
+
+// Apply the rate limiting middleware to all requests
+app.use(limiter); // для ограничения количества запросов к API и предотвращения перегрузки сервера
+app.use(helmet()); // защитим приложение Node.js от уязвимостей и кибератак
 app.use(requestLogger); // подключаем логгер запросов до всех обработчиков роутов
 
 // Не забудьте удалить этот код после успешного прохождения ревью.
