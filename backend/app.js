@@ -10,8 +10,8 @@ const bodyParser = require('body-parser');
 // создаем приложение
 const app = express();
 
-// const path = require('path');
-// const helmet = require('helmet');
+const path = require('path');
+const helmet = require('helmet');
 const { celebrate, Joi, errors } = require('celebrate');
 // const limiter = require('./middlewares/limiter');
 const { PORT, DB_ADDRESS } = require('./config');
@@ -59,7 +59,7 @@ app.use(cors(corsOptions));
 
 // Миддлвэры для безопасности (лимитер и хельмет)
 // app.use(limiter); // ограничим доступ
-// app.use(helmet()); // защитим приложение Node.js от уязвимостей и кибератак
+app.use(helmet()); // защитим приложение Node.js от уязвимостей и кибератак
 
 app.use(requestLogger); // подключаем логгер запросов до всех обработчиков роутов
 
@@ -111,8 +111,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-// // при обращении через браузер index.html
-// app.use(express.static(path.join(__dirname, 'public')));
+// при обращении через браузер index.html
+app.use(express.static(path.join(__dirname, 'public')));
 
 // принимаем сообщения с PORT
 app.listen(PORT, () => {
