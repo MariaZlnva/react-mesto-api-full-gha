@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, Routes, Route } from "react-router-dom";
 
 function Header({ emailUser, onLogout, onOpenBurger, isBurgerOpen }) {
