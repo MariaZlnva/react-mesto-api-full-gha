@@ -1,4 +1,3 @@
-[![Tests](https://github.com/yandex-praktikum/react-mesto-api-full-gha/actions/workflows/tests.yml/badge.svg)](https://github.com/yandex-praktikum/react-mesto-api-full-gha/actions/workflows/tests.yml)
 # Проект: Место (backend+frontend)
 
 ### 🔗 Ссылки:
